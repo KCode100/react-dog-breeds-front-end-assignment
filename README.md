@@ -2,7 +2,7 @@
 ## _Create a page to keep track of your favorite pictures of dog breeds._
  ✨ Completed in 3.5 hours ✨
  
-**[Link to live results](http://dog-breeds.bykivi.com).**
+**[Link to live results](https://bykivi.com/dog-breeds/).**
 
 ## Installation
 
