@@ -1,5 +1,6 @@
 {
   "name": "dogs-collection",
+  "homepage": "https://bykivi.com/dog-breeds/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
