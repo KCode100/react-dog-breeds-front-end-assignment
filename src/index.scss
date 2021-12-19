@@ -39,24 +39,34 @@
                 display: inline-block;
                 text-transform: capitalize;
                 padding: 10px;
+                font-size: 14px;
             }
         }
 
         &__image{
             display: block;
             border-radius: 6px;
-            height: 150px;
+            height: 100px;
             width: auto;
+            margin: auto;
         }
 
-        .notification {
-            text-align: center;
+        .description {
             margin: 0;
             color: rebeccapurple;
+
+            h2 {
+                text-align: center;
+            }
         }
     }
 
-    .btn--warning {
+    .btn-delete {
+        padding: 4px 6px;
+        font-size: 10px;
+    }
+
+    .btn--red {
         background-color: red;
     }
 }

@@ -1,4 +1,4 @@
-const Select = ({collection, selectedHandler, addRandomHandler}) => {
+const Select = ({collection, selectedHandler, addRandomHandler, favorites, clearAllHandler}) => {
     return ( 
         <div className="controls">
             <div className="options">
@@ -18,6 +18,7 @@ const Select = ({collection, selectedHandler, addRandomHandler}) => {
                 </select>
             </div>
             <button className="btn" onClick={addRandomHandler}>Add a random breed</button>
+            {favorites.length > 0 && <button className="btn--red" onClick={clearAllHandler}>Clear All</button>}
         </div>
      );
 }

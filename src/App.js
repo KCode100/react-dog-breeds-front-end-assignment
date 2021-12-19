@@ -4,9 +4,9 @@ import Select from "./components/Select";
 import Header from "./components/Header";
 
 function App() {
-    const [collection, setCollection] = useState([]);
+    const [collection, setCollection] = useState([])
     const [favorites, setFavorites] = useState([])
-    // const []
+    const [imageUrl, setImageUrl] = useState('')
 
     async function fetchBreeds() {
         const response = await fetch('https://dog.ceo/api/breeds/list')
@@ -20,8 +20,17 @@ function App() {
         }))
     }
 
+    const fetchImage = (breed) => {
+        fetch(`https://dog.ceo/api/breed/${breed}/images/random`)
+        .then(res=>res.json())
+        .then((data)=> {
+            setImageUrl({"name":breed, "url":data.message})
+        })
+    }
+
     const selectedHandler = (e) => {
-        setFavorites((prevState)=>[...prevState, {"name":e.target.value, "img":`https://dog.ceo/api/breed/${e.target.value}/images/random`}])
+        const selectedBreed = e.target.value;
+        setFavorites((prevState)=>[...prevState, {"name":selectedBreed, "img":fetchImage(selectedBreed)}])
     }
 
     const deleteHandler = (name) => {
@@ -35,12 +44,18 @@ function App() {
         const availableBreeds = collection.filter(breed=>!breed.isFavorite)
         const randomNumber = Math.floor(Math.random() * availableBreeds.length)
         const randomBreed = availableBreeds[randomNumber];
-        console.log(randomBreed)
-        setFavorites((prevState)=>[...prevState, randomBreed])
+        setFavorites((prevState)=>[...prevState, {...randomBreed, "img":fetchImage(randomBreed.name)}])
+    }
+
+    const clearAllHandler = () => {
+        setFavorites([])
     }
     
     useEffect(() => {
         fetchBreeds();
+        // if (localStorage.getItem("data").length !==0) {
+        //     setFavorites(JSON.parse(localStorage.getItem("data")))
+        // }
     },[])
 
     useEffect(() => {
@@ -56,11 +71,24 @@ function App() {
         setCollection(updatedCollection)
     },[favorites])
 
+    useEffect(()=> {
+        favorites.map(favorite=> {
+            if (favorite.name === imageUrl.name) {
+                favorite.img = imageUrl.url
+            }
+        })
+        setImageUrl('')
+    },[imageUrl])
+
+    // useEffect(()=> {
+    //     localStorage.setItem("data", JSON.stringify(favorites))
+    // },[collection])
+
     return (
         <div className="App">
             <Header />
             <main className="main">
-                <Select collection={collection} selectedHandler={selectedHandler} addRandomHandler={addRandomHandler}/>
+                <Select collection={collection} selectedHandler={selectedHandler} addRandomHandler={addRandomHandler} favorites={favorites} clearAllHandler={clearAllHandler}/>
                 <Favorites favorites={favorites} deleteHandler={deleteHandler}/>
             </main>
         </div>

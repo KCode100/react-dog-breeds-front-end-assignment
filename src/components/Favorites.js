@@ -1,3 +1,5 @@
+import Description from "./Description";
+
 const Favorites = ({favorites, deleteHandler}) => {
     return ( 
         <section className="collection">
@@ -6,13 +8,13 @@ const Favorites = ({favorites, deleteHandler}) => {
                     return (
                         <li className="collection__item" key={key}>
                             <h2 className="dog-title">{favorite.name}</h2>
-                            <button className="btn--warning" onClick={()=>{deleteHandler(favorite.name)}}>X</button>
-                            {/* <img className="collection__image"/> */}
+                            <button className="btn-delete btn--red" onClick={()=>{deleteHandler(favorite.name)}}>X</button>
+                            <img className="collection__image" src={favorite.img}/>
                         </li>
                     )
                 })}
             </ul>
-            {favorites.length < 1 && <p className="notification">Please select your favorite breeds from the available options!</p>}
+            {favorites.length < 1 && <Description/>}
         </section>
      );
 }
