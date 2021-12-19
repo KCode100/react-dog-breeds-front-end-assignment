@@ -14,7 +14,6 @@ function App() {
             return {
                 "name":breed,
                 "isFavorite":false,
-                "img":`https://dog.ceo/api/breed/${breed}/images/random`,
                 "id":key
             }
         }))
