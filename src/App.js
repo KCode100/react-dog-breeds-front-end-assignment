@@ -1,54 +1,59 @@
 import { useEffect, useState } from "react";
 import Favorites from "./components/Favorites";
 import Controls from "./components/Controls";
-import Header from "./Header";
+import Header from "./components/Header";
 
 function App() {
     const [collection, setCollection] = useState([]);
     const [favorites, setFavorites] = useState([])
 
-    const allBreeds = () => {
-       fetch('https://dog.ceo/api/breeds/list')
-        .then(res => res.json())
-        .then(data => {
-            createCollection(data.message)
-        })
-    }
-    
-    const createCollection = (data) => {
-        const list = data.map((name, key) => {
+    async function fetchBreeds() {
+        const response = await fetch('https://dog.ceo/api/breeds/list')
+        const breeds = await response.json();
+        setCollection(breeds.message.map((breed, key)=>{
             return {
-            "name":name,
-            "img":`https://dog.ceo/api/breed/${name}/images/random`,
-            "isFavorite":false,
-            "id":key}
-        });
-        setCollection(list);
-    }
-    
-    const updateCollection = (e) => {
-        setCollection(collection.map(item=> {
-            if (item.name === e.target.value) {
-                item.isFavorite = true
+                "name":breed,
+                "isFavorite":false,
+                "img":`https://dog.ceo/api/breed/${breed}/images/random`,
+                "id":key
             }
-            return item
         }))
     }
+
+    const selectedHandler = (e) => {
+        setFavorites((prevState)=>[...prevState, {"name":e.target.value, "img":`https://dog.ceo/api/breed/${e.target.value}/images/random`}])
+    }
+
+    const deleteHandler = (name) => {
+        const updatedFavorites = favorites.filter(favorite => {
+            return favorite.name !== name
+        })
+        setFavorites(updatedFavorites)
+    }
     
-    useEffect(()=> {
-        allBreeds();
+    useEffect(() => {
+        fetchBreeds();
     },[])
 
-    // useEffect(()=> {
-    //     createCollection()
-    // },[favorites])
+    useEffect(() => {
+        const favoritesList = favorites.map(favorite => favorite.name)
+        const updatedCollection = collection.map(breed => {
+            if (favoritesList.includes(breed.name)) {
+                breed.isFavorite = true;
+            } else {
+                breed.isFavorite = false;
+            }
+            return breed;
+        })
+        setCollection(updatedCollection)
+    },[favorites])
 
     return (
         <div className="App">
             <Header />
             <main className="main">
-                <Controls collection={collection} updateCollection={updateCollection}/>
-                <Favorites collection={collection}/>
+                <Controls collection={collection} selectedHandler={selectedHandler}/>
+                <Favorites favorites={favorites} deleteHandler={deleteHandler}/>
             </main>
         </div>
     );
