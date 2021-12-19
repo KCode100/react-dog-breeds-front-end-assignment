@@ -17,7 +17,7 @@ const Description = () => {
                 <li>React useState</li>
                 <li>React useEffect</li>
                 <li>localStorage API</li>
-                <li>new.css as a lightweight basic styling</li>
+                <li>new.css, a lightweight library for basic styling</li>
                 <li>Sass for additional styling</li>
             </ol>
         </div>

@@ -8,7 +8,7 @@ const Favorites = ({favorites, deleteHandler}) => {
                     return (
                         <li className="collection__item" key={key}>
                             <h2 className="dog-title">{favorite.name}</h2>
-                            <button className="btn-delete btn--red" onClick={()=>{deleteHandler(favorite.name)}}>X</button>
+                            <button className="btn btn-delete btn--red" onClick={()=>{deleteHandler(favorite.name)}}>X</button>
                             <img className="collection__image" src={favorite.img}/>
                         </li>
                     )

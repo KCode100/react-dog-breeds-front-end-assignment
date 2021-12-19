@@ -11,13 +11,7 @@ function App() {
     async function fetchBreeds() {
         const response = await fetch('https://dog.ceo/api/breeds/list')
         const breeds = await response.json();
-        setCollection(breeds.message.map((breed, key)=>{
-            return {
-                "name":breed,
-                "isFavorite":false,
-                "id":key
-            }
-        }))
+        setCollection(breeds.message.map(breed=>{return {"name":breed}}))
     }
 
     const fetchImage = (breed) => {
@@ -53,9 +47,9 @@ function App() {
     
     useEffect(() => {
         fetchBreeds();
-        // if (localStorage.getItem("data").length !==0) {
-        //     setFavorites(JSON.parse(localStorage.getItem("data")))
-        // }
+        if (localStorage.getItem("data").length !==0) {
+            setFavorites(JSON.parse(localStorage.getItem("data")))
+        }
     },[])
 
     useEffect(() => {
@@ -68,17 +62,20 @@ function App() {
             }
             return breed;
         })
-        setCollection(updatedCollection)
-    },[favorites])
-
-    useEffect(()=> {
+        
         favorites.map(favorite=> {
             if (favorite.name === imageUrl.name) {
                 favorite.img = imageUrl.url
             }
         })
+        setCollection(updatedCollection)
         setImageUrl('')
-    },[imageUrl])
+        localStorage.setItem("data", JSON.stringify(favorites))
+    },[favorites, imageUrl])
+
+    // useEffect(()=> {
+
+    // },[favorites,imageUrl])
 
     // useEffect(()=> {
     //     localStorage.setItem("data", JSON.stringify(favorites))

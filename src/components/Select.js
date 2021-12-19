@@ -4,11 +4,11 @@ const Select = ({collection, selectedHandler, addRandomHandler, favorites, clear
             <div className="options">
                 <select name="breeds" id="breeds" defaultValue="Add to favorites" onChange={selectedHandler}>
                     <option value="add to favorites">Add to favorites</option>
-                    {collection.map(item => {
+                    {collection.map((item, key) => {
                         return(
                             <option
                                 value={item.name}
-                                key={item.id}
+                                key={key}
                                 disabled={item.isFavorite}
                                 >
                                 {item.name}
