@@ -15,7 +15,7 @@ const Description = () => {
                 <li>Dog CEO API as data source</li>
                 <li>React useState</li>
                 <li>React useEffect</li>
-                <li>new.css as a lightweight basic styling</li>
+                <li>new.css, a lightweight library for basic styling</li>
                 <li>Sass for additional styling</li>
             </ol>
         </div>
