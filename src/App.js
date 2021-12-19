@@ -8,18 +8,16 @@ function App() {
     const [favorites, setFavorites] = useState([])
     const [imageUrl, setImageUrl] = useState('')
 
+    //Fetch list of breeds 
     async function fetchBreeds() {
         const response = await fetch('https://dog.ceo/api/breeds/list')
         const breeds = await response.json();
         setCollection(breeds.message.map((breed, key)=>{
-            return {
-                "name":breed,
-                "isFavorite":false,
-                "id":key
-            }
+            return {"name":breed}
         }))
     }
 
+    // Fetch individual image
     const fetchImage = (breed) => {
         fetch(`https://dog.ceo/api/breed/${breed}/images/random`)
         .then(res=>res.json())
@@ -28,11 +26,13 @@ function App() {
         })
     }
 
+    // Add selected option to favorites
     const selectedHandler = (e) => {
         const selectedBreed = e.target.value;
         setFavorites((prevState)=>[...prevState, {"name":selectedBreed, "img":fetchImage(selectedBreed)}])
     }
 
+    // Remove a favorite from list
     const deleteHandler = (name) => {
         const updatedFavorites = favorites.filter(favorite => {
             return favorite.name !== name
@@ -40,6 +40,7 @@ function App() {
         setFavorites(updatedFavorites)
     }
 
+    // Add a random breed to favorites
     const addRandomHandler = () => {
         const availableBreeds = collection.filter(breed=>!breed.isFavorite)
         const randomNumber = Math.floor(Math.random() * availableBreeds.length)
@@ -47,17 +48,17 @@ function App() {
         setFavorites((prevState)=>[...prevState, {...randomBreed, "img":fetchImage(randomBreed.name)}])
     }
 
+    // Clear all favorites
     const clearAllHandler = () => {
         setFavorites([])
     }
     
+    // Call API on page load
     useEffect(() => {
         fetchBreeds();
-        // if (localStorage.getItem("data").length !==0) {
-        //     setFavorites(JSON.parse(localStorage.getItem("data")))
-        // }
     },[])
 
+    // Update isFavorite value from favorites to collection
     useEffect(() => {
         const favoritesList = favorites.map(favorite => favorite.name)
         const updatedCollection = collection.map(breed => {
@@ -71,6 +72,7 @@ function App() {
         setCollection(updatedCollection)
     },[favorites])
 
+    // Assign image URL to selected breed
     useEffect(()=> {
         favorites.map(favorite=> {
             if (favorite.name === imageUrl.name) {
@@ -79,10 +81,6 @@ function App() {
         })
         setImageUrl('')
     },[imageUrl])
-
-    // useEffect(()=> {
-    //     localStorage.setItem("data", JSON.stringify(favorites))
-    // },[collection])
 
     return (
         <div className="App">
