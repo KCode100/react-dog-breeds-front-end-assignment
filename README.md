@@ -22,25 +22,25 @@ npm install
 npm run build
 ```
 
-## Result
-
-The page should allow the user to:
-- Search for a breed and add it to the collection
-- Remove a breed from the collection
-- Add a random breed to the collection
-
-## Assumptions
-
-- A breed can only be added to the collection one time
-- Sub-breeds cannot be added
-
-## Rules
-
-- Use the Dog CEO API as your data source
-- Use React.js to complete the assignment
-- We expect this to take about 3 hours, but bear in mind that finished is better than
-partly-finished.
-- Provide instructions for running the project
-- Add your project to github and send us the link to the repo
-- A breed can only be added to the collection one time
-- Sub-breeds cannot be added
+>## Result
+>
+>The page should allow the user to:
+>- Search for a breed and add it to the collection
+>- Remove a breed from the collection
+>- Add a random breed to the collection
+>
+>## Assumptions
+>
+>- A breed can only be added to the collection one time
+>- Sub-breeds cannot be added
+>
+>## Rules
+>
+>- Use the Dog CEO API as your data source
+>- Use React.js to complete the assignment
+>- We expect this to take about 3 hours, but bear in mind that finished is better than
+>partly-finished.
+>- Provide instructions for running the project
+>- Add your project to github and send us the link to the repo
+>- A breed can only be added to the collection one time
+>- Sub-breeds cannot be added
