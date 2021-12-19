@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Favorites from "./components/Favorites";
-import Controls from "./components/Controls";
+import Select from "./components/Select";
 import Header from "./components/Header";
 
 function App() {
@@ -52,7 +52,7 @@ function App() {
         <div className="App">
             <Header />
             <main className="main">
-                <Controls collection={collection} selectedHandler={selectedHandler}/>
+                <Select collection={collection} selectedHandler={selectedHandler}/>
                 <Favorites favorites={favorites} deleteHandler={deleteHandler}/>
             </main>
         </div>

@@ -12,7 +12,7 @@ const Favorites = ({favorites, deleteHandler}) => {
                     )
                 })}
             </ul>
-            {favorites.length < 1 && <p className="notification">Nothing here!</p>}
+            {favorites.length < 1 && <p className="notification">Please select your favorite breeds from the available options!</p>}
         </section>
      );
 }

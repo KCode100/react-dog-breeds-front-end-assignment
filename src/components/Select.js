@@ -1,4 +1,4 @@
-const Controls = ({collection, selectedHandler}) => {
+const Select = ({collection, selectedHandler}) => {
     return ( 
         <div className="controls">
             <div className="options">
@@ -22,4 +22,4 @@ const Controls = ({collection, selectedHandler}) => {
      );
 }
  
-export default Controls;
+export default Select;
