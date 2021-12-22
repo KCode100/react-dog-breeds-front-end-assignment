@@ -1,14 +1,15 @@
 const Description = () => {
-    return ( 
+    return (
         <div className="description">
             <h2>Functionality</h2>
             <ol>
-                <li>Select from list of breeds</li>
-                <li>Display image and title</li>
-                <li>Disable chosen breeds in options</li>
-                <li>Add a random breed to collection</li>
-                <li>Delete a breed from collection</li>
+                <li>Search for a breed and add it to the collection</li>
+                <li>Remove a breed from the collection</li>
+                <li>Add a random breed to the collection</li>
                 <li>Clear entire collection</li>
+                <li>Each breed in the collection should show the name and an image</li>
+                <li>A breed can only be added to the collection one time</li>
+                <li>Sub-breeds cannot be added</li>
             </ol>
             <h2>Technologies</h2>
             <ol>
@@ -19,7 +20,7 @@ const Description = () => {
                 <li>Sass for additional styling</li>
             </ol>
         </div>
-     );
+    );
 }
- 
+
 export default Description;
